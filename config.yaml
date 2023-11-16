@@ -1,0 +1,6 @@
+client: "json"
+
+# @todo: add more clients
+settings:
+  json:
+    url: "http://localhost:3100/loki/api/v1/push"
