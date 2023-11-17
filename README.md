@@ -90,7 +90,7 @@ logger.AddMessage(&{
     }
 })
 
-// send all message
+// send all messages
 logger.Send(nil)
 ```
 
