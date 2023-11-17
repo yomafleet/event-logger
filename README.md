@@ -17,7 +17,7 @@ type EventMessage struct {
 EventMessage {
 	Message: "User identification updated"
 	Event:   "profile.updated" // filterable in dashboard
-	Context: "user" // use to populate loki lable (index)
+	Context: "user" // to populate log lable or index
 	Data:    map[string]interface{
         "id": 1,
         "name": "Admin",
@@ -58,7 +58,7 @@ logger = logger.NewWithClient("json")
 logger.AddMessage(&{
 	Message: "User identification updated"
 	Event:   "profile.updated" // filterable in dashboard
-	Context: "user" // use to populate loki lable (index)
+	Context: "user" // to populate log lable or index
 	Data:    map[string]interface{
         "id": 1,
         "name": "Admin",
@@ -76,7 +76,7 @@ logger.AddMessage(&{
 logger.AddMessage(&{
 	Message: "User identification updated"
 	Event:   "profile.updated" // filterable in dashboard
-	Context: "user" // use to populate loki lable (index)
+	Context: "user" // to populate log lable or index
 	Data:    map[string]interface{
         "id": 2,
         "name": "Editor",
@@ -104,7 +104,7 @@ logger := elog.New("path/to/config.yaml")
 logger.Send(&{
 	Message: "User identification updated"
 	Event:   "profile.updated" // filterable in dashboard
-	Context: "user" // use to populate loki lable (index)
+	Context: "user" // to populate log lable or index
 	Data:    map[string]interface{
         "id": 2,
         "name": "Editor",
