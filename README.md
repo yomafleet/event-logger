@@ -51,7 +51,8 @@ import "github.com/yomafleet/elog"
 // instantiate with config file
 logger := elog.New("path/to/config.yaml")
 
-// or get a new logger with a desire client after
+// or get a new logger with a desire client after,
+// only support `json` client for now
 logger = logger.NewWithClient("json")
 
 // add event message
@@ -94,7 +95,7 @@ logger.AddMessage(&{
 logger.Send(nil)
 ```
 
-Alternatively, you can send message in one go
+Alternatively, you can send a single message in one go
 
 ```golang
 import "github.com/yomafleet/elog"
@@ -119,7 +120,7 @@ logger.Send(&{
 })
 ```
 
-**NOTE**: after `Send` has been called, all the message streams data will be flushed.
+**NOTE**: after `Send` has been called, all the messages in streams data will be flushed.
 
 ### Todo:
 
