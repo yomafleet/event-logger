@@ -13,7 +13,7 @@
 type EventMessage struct {
 	Message string                 `json:"message"`
 	Event   string                 `json:"event"`
-	Context string                 `json:"context"`
+	Type string                 `json:"context"`
 	Data    map[string]interface{} `json:"data"`
 }
 ```
@@ -24,7 +24,7 @@ type EventMessage struct {
 EventMessage {
 	Message: "User identification updated"
 	Event:   "profile.updated" // filterable in dashboard
-	Context: "user" // to populate log lable or index
+	Type: "user" // to populate log lable or index
 	Data:    map[string]interface{
         "id": 1,
         "name": "Admin",
@@ -66,7 +66,7 @@ logger = logger.NewWithClient("json")
 logger.AddMessage(&{
 	Message: "User identification updated"
 	Event:   "profile.updated" // filterable in dashboard
-	Context: "user" // to populate log lable or index
+	Type: "user" // to populate log lable or index
 	Data:    map[string]interface{
         "id": 1,
         "name": "Admin",
@@ -80,11 +80,11 @@ logger.AddMessage(&{
     }
 })
 
-// adding message with same Context and Event will be grouped
+// adding message with same Type and Event will be grouped
 logger.AddMessage(&{
 	Message: "User identification updated"
 	Event:   "profile.updated" // filterable in dashboard
-	Context: "user" // to populate log lable or index
+	Type: "user" // to populate log lable or index
 	Data:    map[string]interface{
         "id": 2,
         "name": "Editor",
@@ -112,7 +112,7 @@ logger := elog.New("path/to/config.yaml")
 logger.Send(&{
 	Message: "User identification updated"
 	Event:   "profile.updated" // filterable in dashboard
-	Context: "user" // to populate log lable or index
+	Type: "user" // to populate log lable or index
 	Data:    map[string]interface{
         "id": 2,
         "name": "Editor",

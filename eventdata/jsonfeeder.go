@@ -32,7 +32,7 @@ func (j *JsonFeeder) Feed() error {
 		return err
 	}
 
-	key := j.message.Context + "_" + j.message.Event
+	key := j.message.Type + "_" + j.message.Event
 	j.client.AddStream(key, stream)
 
 	return nil
@@ -43,7 +43,7 @@ func (j *JsonFeeder) mapToStreamSet() (*jsonclient.StreamSet, error) {
 		return nil, errors.New("event message is not ready, it might be empty")
 	}
 
-	label := map[string]string{"event": j.message.Context}
+	label := map[string]string{"event": j.message.Type}
 	stream := jsonclient.StreamSet{}
 	stream.AddLabel(&label)
 

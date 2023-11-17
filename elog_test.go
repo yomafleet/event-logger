@@ -13,7 +13,7 @@ func TestNewLoggerAddMessage(t *testing.T) {
 	err := logger.AddMessage(&eventdata.EventMessage{
 		Message: "Testing",
 		Event:   "testing.event",
-		Context: "testing",
+		Type:    "testing",
 		Data:    map[string]interface{}{"testing": true},
 	})
 
@@ -35,7 +35,7 @@ func TestNewLoggerSend(t *testing.T) {
 	err := logger.Send(&eventdata.EventMessage{
 		Message: "Testing",
 		Event:   "testing.event",
-		Context: "testing",
+		Type:    "testing",
 		Data:    map[string]interface{}{"testing": true},
 	})
 

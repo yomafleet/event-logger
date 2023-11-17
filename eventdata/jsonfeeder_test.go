@@ -10,7 +10,7 @@ func TestJsonFeederFeed(t *testing.T) {
 	msg := EventMessage{
 		Message: "Testing",
 		Event:   "testevent.test",
-		Context: "test",
+		Type:    "test",
 		Data:    map[string]interface{}{"example": "value"},
 	}
 

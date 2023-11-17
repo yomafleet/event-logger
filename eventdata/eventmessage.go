@@ -7,7 +7,7 @@ import (
 type EventMessage struct {
 	Message string                 `json:"message"`
 	Event   string                 `json:"event"`
-	Context string                 `json:"context"`
+	Type    string                 `json:"context"`
 	Data    map[string]interface{} `json:"data"`
 }
 

@@ -12,7 +12,7 @@ func TestEventMessageIsReady(t *testing.T) {
 	msg = EventMessage{
 		Message: "Testing",
 		Event:   "testevent.test",
-		Context: "test",
+		Type:    "test",
 		Data:    map[string]interface{}{"example": "value"},
 	}
 
@@ -25,7 +25,7 @@ func TestEventMessageToJson(t *testing.T) {
 	msg := EventMessage{
 		Message: "Testing",
 		Event:   "testevent.test",
-		Context: "test",
+		Type:    "test",
 		Data:    map[string]interface{}{"example": "value"},
 	}
 
@@ -46,7 +46,7 @@ func TestEventMessageToMap(t *testing.T) {
 	msg := EventMessage{
 		Message: "Testing",
 		Event:   "testevent.test",
-		Context: "test",
+		Type:    "test",
 		Data:    map[string]interface{}{"example": "value"},
 	}
 
