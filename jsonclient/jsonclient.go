@@ -26,6 +26,15 @@ func (j *JsonClient) WithHttpClient(url string) (*JsonClient, error) {
 }
 
 func (j *JsonClient) AddStream(key string, stream *StreamSet) *JsonClient {
+	existed, ok := j.Streams[key]
+
+	if ok {
+		existed.Values = append(existed.Values, stream.Values...)
+		j.Streams[key] = existed
+
+		return j
+	}
+
 	if j.Streams == nil {
 		j.Streams = map[string]StreamSet{}
 	}

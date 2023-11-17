@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestJsonClientAddStream(t *testing.T) {
+func TestJsonClientAddStreamNew(t *testing.T) {
 	j := JsonClient{}
 	streamset := StreamSet{
 		Stream: map[string]string{"label": "value"},
@@ -19,6 +19,30 @@ func TestJsonClientAddStream(t *testing.T) {
 
 	if !ok {
 		t.Error("Stream list is empty")
+	}
+}
+
+func TestJsonClientAddStreamExisting(t *testing.T) {
+	j := JsonClient{}
+
+	j.AddStream("example", &StreamSet{
+		Stream: map[string]string{"label": "value"},
+		Values: [][]string{{"12345", "abcdef"}, {"12346", "abcdeg"}},
+	})
+
+	j.AddStream("example", &StreamSet{
+		Stream: map[string]string{"label": "value"},
+		Values: [][]string{{"12347", "abcdef"}},
+	})
+
+	existed, ok := j.Streams["example"]
+
+	if !ok {
+		t.Error("Stream list is empty")
+	}
+
+	if len(existed.Values) != 3 {
+		t.Errorf("Expected stream value length 3, not equals to %d", len(existed.Values))
 	}
 }
 
