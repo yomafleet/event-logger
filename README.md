@@ -16,7 +16,7 @@ type EventMessage struct {
 ```golang
 EventMessage {
 	Message: "User identification updated"
-	Event:   "profile.updated" // filterable in daashboard
+	Event:   "profile.updated" // filterable in dashboard
 	Context: "user" // use to populate loki lable (index)
 	Data:    map[string]interface{
         "id": 1,
@@ -57,7 +57,7 @@ logger = logger.NewWithClient("json")
 // add event message
 logger.AddMessage(&{
 	Message: "User identification updated"
-	Event:   "profile.updated" // filterable in daashboard
+	Event:   "profile.updated" // filterable in dashboard
 	Context: "user" // use to populate loki lable (index)
 	Data:    map[string]interface{
         "id": 1,
@@ -75,7 +75,7 @@ logger.AddMessage(&{
 // adding message with same Context and Event will be grouped
 logger.AddMessage(&{
 	Message: "User identification updated"
-	Event:   "profile.updated" // filterable in daashboard
+	Event:   "profile.updated" // filterable in dashboard
 	Context: "user" // use to populate loki lable (index)
 	Data:    map[string]interface{
         "id": 2,
@@ -103,7 +103,7 @@ import "github.com/yomafleet/elog"
 logger := elog.New("path/to/config.yaml")
 logger.Send(&{
 	Message: "User identification updated"
-	Event:   "profile.updated" // filterable in daashboard
+	Event:   "profile.updated" // filterable in dashboard
 	Context: "user" // use to populate loki lable (index)
 	Data:    map[string]interface{
         "id": 2,
