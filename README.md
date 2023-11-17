@@ -1,5 +1,12 @@
 # Application Event Log
 
+### Todo:
+
+- [x] add json client
+- [ ] add protobuf client
+- [ ] add promtail client
+- [ ] utilize concurrency mode for better performance
+
 ## Event Message
 
 ```golang
@@ -121,10 +128,3 @@ logger.Send(&{
 ```
 
 **NOTE**: after `Send` has been called, all the messages in streams data will be flushed.
-
-### Todo:
-
-- [x] add json client
-- [ ] add protobuf client
-- [ ] add promtail client
-- [ ] utilize concurrency mode for better performance
