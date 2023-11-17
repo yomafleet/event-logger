@@ -86,10 +86,12 @@ func loadConfig(path string) *Config {
 }
 
 func setup(config *Config) (logClient, logFeeder, error) {
+	// @todo: use factory and a strategy map
 	if config.Client == "json" {
 		client := jsonclient.JsonClient{Url: config.Settings["json"]["url"]}
 		feeder := eventdata.JsonFeeder{}
 		feeder.SetClient(&client)
+		feeder.SetService(config.Service)
 
 		return &client, &feeder, nil
 	} else if config.Client == "mock" {

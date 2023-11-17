@@ -7,8 +7,13 @@ import (
 )
 
 type JsonFeeder struct {
+	service string
 	message EventMessage
 	client  *jsonclient.JsonClient
+}
+
+func (j *JsonFeeder) SetService(name string) {
+	j.service = name
 }
 
 func (j *JsonFeeder) SetMessage(msg *EventMessage) {
@@ -43,7 +48,11 @@ func (j *JsonFeeder) mapToStreamSet() (*jsonclient.StreamSet, error) {
 		return nil, errors.New("event message is not ready, it might be empty")
 	}
 
-	label := map[string]string{"event": j.message.Type}
+	if len(j.service) == 0 {
+		return nil, errors.New("service name is not defined")
+	}
+
+	label := map[string]string{"applog": j.service}
 	stream := jsonclient.StreamSet{}
 	stream.AddLabel(&label)
 

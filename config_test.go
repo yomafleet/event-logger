@@ -35,3 +35,15 @@ func TestConfigLoadConfigEmptyString(t *testing.T) {
 		t.Error("Expected error not found")
 	}
 }
+
+func TestConfigHasServiceName(t *testing.T) {
+	c, err := LoadConfig("./config.yaml")
+
+	if err != nil {
+		t.Error(err)
+	}
+
+	if c.Service != "plus" {
+		t.Error("Config for 'json' client has no 'url' field")
+	}
+}

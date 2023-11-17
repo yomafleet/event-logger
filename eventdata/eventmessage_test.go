@@ -35,7 +35,7 @@ func TestEventMessageToJson(t *testing.T) {
 		t.Error(err)
 	}
 
-	expected := `{"message":"Testing","event":"testevent.test","context":"test","data":{"example":"value"}}`
+	expected := `{"message":"Testing","event":"testevent.test","type":"test","data":{"example":"value"}}`
 
 	if string(m) != expected {
 		t.Errorf("Expected %s, not equals to %s", expected, string(m))
@@ -56,7 +56,7 @@ func TestEventMessageToMap(t *testing.T) {
 		t.Error(err)
 	}
 
-	if m["message"] != "Testing" || m["event"] != "testevent.test" || m["context"] != "test" {
+	if m["message"] != "Testing" || m["event"] != "testevent.test" || m["type"] != "test" {
 		t.Errorf("Event message values might be incorrect, %v", m)
 	}
 }

@@ -8,6 +8,7 @@ import (
 
 type Config struct {
 	Client   string                       `yaml:"client"`
+	Service  string                       `yaml:"service"`
 	Settings map[string]map[string]string `yaml:"settings"`
 }
 

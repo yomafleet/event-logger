@@ -1,5 +1,7 @@
 client: "json" # default client to use
 
+service: "plus" # service name as lable or index
+
 # @todo: add more clients
 settings:
   json:

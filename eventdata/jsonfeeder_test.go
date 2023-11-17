@@ -17,6 +17,7 @@ func TestJsonFeederFeed(t *testing.T) {
 	j := JsonFeeder{}
 	j.SetMessage(&msg)
 	j.SetClient(&jsonclient.JsonClient{})
+	j.SetService("example")
 
 	err := j.Feed()
 
