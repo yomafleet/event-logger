@@ -1,4 +1,4 @@
-client: "json"
+client: "json" # default client to use
 
 # @todo: add more clients
 settings:

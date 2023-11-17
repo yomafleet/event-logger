@@ -130,4 +130,8 @@ func TestJsonClientSend(t *testing.T) {
 	if string(body) != `{"status":"success"}` {
 		t.Errorf("Expected: %s, not equals to %s", `{"status":"success"}`, string(body))
 	}
+
+	if j.Streams != nil {
+		t.Error("Streams must be flushed after send")
+	}
 }

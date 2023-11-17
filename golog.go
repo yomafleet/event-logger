@@ -23,13 +23,25 @@ type Logger struct {
 	feeder *logFeeder
 }
 
-func (l *Logger) Send(msg eventdata.EventMessage) error {
+func (l *Logger) AddMessage(msg *eventdata.EventMessage) error {
 	feeder := *l.feeder
-	feeder.SetMessage(&msg)
+	feeder.SetMessage(msg)
 	err := feeder.Feed()
 
 	if err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (l *Logger) Send(msg *eventdata.EventMessage) error {
+	if msg != nil {
+		err := l.AddMessage(msg)
+
+		if err != nil {
+			return err
+		}
 	}
 
 	client := *l.client

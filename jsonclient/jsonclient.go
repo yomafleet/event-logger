@@ -123,5 +123,11 @@ func (j *JsonClient) Send() ([]byte, error) {
 		return nil, err
 	}
 
+	j.Flush()
+
 	return body, err
+}
+
+func (j *JsonClient) Flush() {
+	j.Streams = nil
 }
