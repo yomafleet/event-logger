@@ -3,9 +3,9 @@ package elog
 import (
 	"errors"
 
-	"github.com/yomafleet/elog/eventdata"
-	"github.com/yomafleet/elog/jsonclient"
-	"github.com/yomafleet/elog/mockclient"
+	"github.com/yomafleet/eventlogger/eventdata"
+	"github.com/yomafleet/eventlogger/jsonclient"
+	"github.com/yomafleet/eventlogger/mockclient"
 )
 
 type logClient interface {

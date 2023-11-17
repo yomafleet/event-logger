@@ -3,7 +3,7 @@ package elog
 import (
 	"testing"
 
-	"github.com/yomafleet/elog/eventdata"
+	"github.com/yomafleet/eventlogger/eventdata"
 )
 
 func TestNewLoggerAddMessage(t *testing.T) {

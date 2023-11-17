@@ -53,7 +53,7 @@ settings:
 ### Example
 
 ```golang
-import "github.com/yomafleet/elog"
+import "github.com/yomafleet/eventlogger"
 
 // instantiate with config file
 logger := elog.New("path/to/config.yaml")
@@ -105,7 +105,7 @@ logger.Send(nil)
 Alternatively, you can send a single message in one go
 
 ```golang
-import "github.com/yomafleet/elog"
+import "github.com/yomafleet/eventlogger"
 
 // instantiate with config file
 logger := elog.New("path/to/config.yaml")

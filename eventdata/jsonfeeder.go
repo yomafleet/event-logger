@@ -3,7 +3,7 @@ package eventdata
 import (
 	"errors"
 
-	"github.com/yomafleet/elog/jsonclient"
+	"github.com/yomafleet/eventlogger/jsonclient"
 )
 
 type JsonFeeder struct {
