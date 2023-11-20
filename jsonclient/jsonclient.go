@@ -13,33 +13,30 @@ type httpClient interface {
 	Post(url, contentType string, body io.Reader) (resp *http.Response, err error)
 }
 
+type JsonClientConfig struct {
+	Url   string
+	Id    string
+	Token string
+}
+
 type JsonClient struct {
-	Url        string
-	Streams    map[string]StreamSet
+	Config     JsonClientConfig
+	Streams    map[string]*StreamSet
 	HttpClient httpClient
 }
 
-func (j *JsonClient) WithHttpClient(url string) (*JsonClient, error) {
+func (j *JsonClient) WithHttpClient() (*JsonClient, error) {
 	j.HttpClient = &http.Client{}
 
 	return j, nil
 }
 
 func (j *JsonClient) AddStream(key string, stream *StreamSet) *JsonClient {
-	existed, ok := j.Streams[key]
-
-	if ok {
-		existed.Values = append(existed.Values, stream.Values...)
-		j.Streams[key] = existed
-
-		return j
-	}
-
 	if j.Streams == nil {
-		j.Streams = map[string]StreamSet{}
+		j.Streams = map[string]*StreamSet{}
 	}
 
-	j.Streams[key] = *stream
+	j.Streams[key] = stream
 
 	return j
 }
@@ -51,7 +48,7 @@ func (j *JsonClient) GetStream(key string) (*StreamSet, error) {
 		return nil, errors.New("stream is not set yet")
 	}
 
-	return &stream, nil
+	return stream, nil
 }
 
 func (j *JsonClient) AppendValue(key string, val *map[string]interface{}) (*JsonClient, error) {
@@ -61,13 +58,11 @@ func (j *JsonClient) AppendValue(key string, val *map[string]interface{}) (*Json
 		return nil, streamErr
 	}
 
-	appended, err := stream.AddValue(val)
+	_, err := stream.AddValue(val)
 
 	if err != nil {
 		return nil, err
 	}
-
-	j.AddStream(key, appended)
 
 	return j, err
 }
@@ -76,7 +71,7 @@ func (j *JsonClient) ToJson() ([]byte, error) {
 	var streamList []StreamSet
 
 	for _, stream := range j.Streams {
-		streamList = append(streamList, stream)
+		streamList = append(streamList, *stream)
 	}
 
 	streams := map[string][]StreamSet{
@@ -93,14 +88,14 @@ func (j *JsonClient) ToJson() ([]byte, error) {
 }
 
 func (j *JsonClient) Send() ([]byte, error) {
-	_, err := netUrl.ParseRequestURI(j.Url)
+	url, err := j.buildUrlFromConfig()
 
 	if err != nil {
 		return nil, err
 	}
 
 	if j.HttpClient == nil {
-		j.WithHttpClient(j.Url)
+		j.WithHttpClient()
 	}
 
 	jsonBytes, err := j.ToJson()
@@ -109,7 +104,7 @@ func (j *JsonClient) Send() ([]byte, error) {
 		return nil, err
 	}
 
-	response, err := j.HttpClient.Post(j.Url, "application/json", bytes.NewBuffer(jsonBytes))
+	response, err := j.HttpClient.Post(url, "application/json", bytes.NewBuffer(jsonBytes))
 
 	if err != nil {
 		return nil, err
@@ -123,11 +118,25 @@ func (j *JsonClient) Send() ([]byte, error) {
 		return nil, err
 	}
 
-	j.Flush()
+	j.Clear()
 
 	return body, err
 }
 
-func (j *JsonClient) Flush() {
+func (j *JsonClient) Clear() {
 	j.Streams = nil
+}
+
+func (j *JsonClient) buildUrlFromConfig() (string, error) {
+	parsed, err := netUrl.ParseRequestURI(j.Config.Url)
+
+	if err != nil {
+		return "", err
+	}
+
+	if len(j.Config.Id) > 0 && len(j.Config.Token) > 0 {
+		parsed.User = netUrl.UserPassword(j.Config.Id, j.Config.Token)
+	}
+
+	return parsed.String(), nil
 }

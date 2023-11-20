@@ -88,7 +88,12 @@ func loadConfig(path string) *Config {
 func setup(config *Config) (logClient, logFeeder, error) {
 	// @todo: use factory and a strategy map
 	if config.Client == "json" {
-		client := jsonclient.JsonClient{Url: config.Settings["json"]["url"]}
+		jsonConfig := jsonclient.JsonClientConfig{
+			Url:   config.Settings["json"]["url"],
+			Id:    config.Settings["json"]["id"],
+			Token: config.Settings["json"]["token"],
+		}
+		client := jsonclient.JsonClient{Config: jsonConfig}
 		feeder := eventdata.JsonFeeder{}
 		feeder.SetClient(&client)
 		feeder.SetService(config.Service)

@@ -6,3 +6,5 @@ service: "plus" # service name as lable or index
 settings:
   json:
     url: "http://localhost:3100/loki/api/v1/push"
+    id:
+    token:

@@ -41,8 +41,8 @@ func TestJsonClientAddStreamExisting(t *testing.T) {
 		t.Error("Stream list is empty")
 	}
 
-	if len(existed.Values) != 3 {
-		t.Errorf("Expected stream value length 3, not equals to %d", len(existed.Values))
+	if len(existed.Values) != 1 {
+		t.Errorf("Expected stream value length 1, not equals to %d", len(existed.Values))
 	}
 }
 
@@ -113,7 +113,11 @@ func TestJsonClientSend(t *testing.T) {
 
 	defer server.Close()
 
-	j := JsonClient{Url: server.URL}
+	j := JsonClient{Config: JsonClientConfig{
+		Url:   server.URL,
+		Id:    "",
+		Token: "",
+	}}
 	streamset := StreamSet{
 		Stream: map[string]string{"label": "value"},
 		Values: [][]string{{"12345", "abcdef"}, {"12346", "abcdeg"}},

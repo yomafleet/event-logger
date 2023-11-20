@@ -44,12 +44,14 @@ EventMessage {
 ```yaml
 client: "json" # default client to use
 
-service: "plus" # service name as lable or index
+service: "plus/dev" # service name as lable or index
 
 # @todo: add more clients
 settings:
   json:
     url: "http://localhost:3100/loki/api/v1/push"
+    id:
+    token:
 ```
 
 ### Example
