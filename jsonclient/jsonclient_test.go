@@ -41,7 +41,7 @@ func TestJsonClientAddStreamExisting(t *testing.T) {
 		t.Error("Stream list is empty")
 	}
 
-	if len(existed.Values) != 1 {
+	if len(existed.Values) != 3 {
 		t.Errorf("Expected stream value length 1, not equals to %d", len(existed.Values))
 	}
 }

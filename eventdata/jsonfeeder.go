@@ -8,7 +8,7 @@ import (
 
 type JsonFeeder struct {
 	service string
-	message EventMessage
+	message *EventMessage
 	client  *jsonclient.JsonClient
 }
 
@@ -17,7 +17,7 @@ func (j *JsonFeeder) SetService(name string) {
 }
 
 func (j *JsonFeeder) SetMessage(msg *EventMessage) {
-	j.message = *msg
+	j.message = msg
 }
 
 func (j *JsonFeeder) SetClient(client *jsonclient.JsonClient) *JsonFeeder {
@@ -39,6 +39,7 @@ func (j *JsonFeeder) Feed() error {
 
 	key := j.message.Type + "_" + j.message.Event
 	j.client.AddStream(key, stream)
+	j.clearMessage()
 
 	return nil
 }
@@ -65,4 +66,8 @@ func (j *JsonFeeder) mapToStreamSet() (*jsonclient.StreamSet, error) {
 	stream.AddValue(&mapped)
 
 	return &stream, nil
+}
+
+func (j *JsonFeeder) clearMessage() {
+	j.message = nil
 }
