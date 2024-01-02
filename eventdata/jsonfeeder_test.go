@@ -3,7 +3,7 @@ package eventdata
 import (
 	"testing"
 
-	"github.com/yomafleet/eventlogger/jsonclient"
+	"github.com/yomafleet/event-logger/jsonclient"
 )
 
 func TestJsonFeederFeed(t *testing.T) {
