@@ -1,4 +1,4 @@
-module github.com/yomafleet/eventlogger
+module github.com/yomafleet/event-logger
 
 go 1.21.1
 
