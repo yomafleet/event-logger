@@ -53,6 +53,7 @@ func (l *Logger) Send(msg *eventdata.EventMessage) error {
 func (l *Logger) NewWithClient(client string) *Logger {
 	return makeLogger(&Config{
 		Client:   client,
+		Service:  l.config.Service,
 		Settings: l.config.Settings,
 	})
 }
